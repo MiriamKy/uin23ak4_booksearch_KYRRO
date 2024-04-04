@@ -1,6 +1,6 @@
 import Bookcard from "./Bookcard";
 
-export default function() {
+export default function Search_results() {
 
     return (
         // Her må jeg mappe for å skrive ut et "Bookcard" for hver bok som stemmer med søkeresultatet
