@@ -4,39 +4,23 @@ import { useEffect, useState } from "react";
 
 function App() {
 
-  const [input, setInput] = useState("Guyion"); //setInput er KANSKJE den funskjonen vi bruker senere for å definere ny state ved hjelp av input-feltet
-  const [books, setBooks] = useState([]); //Books kommer i bruk i .map
+  const [input, setInput] = useState("James+Bond"); //setInput er KANSKJE den funskjonen vi bruker senere for å sette ny state ved hjelp av input-feltet
+  const [books, setBooks] = useState([]); //Books er en state som jeg senere .mapper, her har den ingen start-innhold, men den er satt til en tom array
 
   const getBooks = ()=>{
-      fetch(`https://openlibrary.org/search.json?q=${input}`)
+      fetch(`https://openlibrary.org/search.json?title=${input}`)
       .then(response => response.json())
       .then(data => setBooks(data.docs))
       .catch(error => console.error(error))
       }
 
   useEffect(()=>{
-    getBooks()
-  },[])
-
-  const countLetters = (e)=>{
-    if (e.target.value.length < 3) {
-      console.log("Waiting for letters")
-    }
-    else {
-      setInput()
-    }
-  }
-
-  const handleChange = (e)=>{
-    setInput(e.target.value)
-}
-
-  const results = books.filter((book) => book.title == input)
+    if (input.length > 2) {
+      getBooks()
+    }},[input])
 
   console.log(input)
-  console.log(results)
-
-  // const key = books.isbn.filter((index) = index < 1) // Prøvd å lage en variabel som skal holde på en unik key for hvert element som blir skrevet ut, derfor har jeg prøvd å bruke .filter for å filtrere bort alle andre listepunkter enn de med index 0
+  console.log(books)
 
   return (
     <>
@@ -44,16 +28,18 @@ function App() {
       <h1>Booksearch</h1>
         <form>
             <label htmlFor="bookSearch">Search by title</label>
-            <input value={input} onChange={handleChange} type="text" placeholder="James Bond"/>
-            <button type="submit">Search</button> 
+            <input onChange={(e) => setInput(e.target.value)} type="text" placeholder="Start typing..."/>
+            <button type="button" onClick={() => getBooks()}>Search</button> 
         </form>
-        {/* Her kan jeg legge en slik loading ? som skriver ut en string når siden loader etter søkeresultater */}
-        {books.map(book => {
+        {books?.map((book) => {
           return (
             <article key={book.key}>
             <h2>{book.title}</h2>
-            <h3>{book.first_publish_year}</h3>
-            <p></p>
+            <h3>Author(s):</h3>
+            <ul>{book.author_name?.map((author, index) => <li key={index}>{author}</li>)}</ul>
+            <h3>Published: {book.first_publish_year}</h3>
+            {book.ratings_average ? <h3>Rating: {book.ratings_average}</h3> : null}
+            {book.isbn?.[0] ? <a href={`https://www.amazon.com/s?k=${book.isbn[0]}`} target="_blank"><button>Buy on Amazon</button></a> : <a href={`https://www.amazon.com/b?node=283155`} target="_blank"><button>Find on Amazon</button></a>}
             </article>
           )
         })}
