@@ -1,8 +1,8 @@
 import React from "react"
 
-export default function({children}) {
+export default function Layout({children}) {
 
-    // Å legge noe her kan gjøre det vanskelig å sende ting videre, denne er på en måte paralell mtp funksjonalitet osv
+    // Å legge noe her kan gjøre det vanskelig å sende ting videre, denne er på en måte paralell mtp funksjonalitet osc
 
     return(
         <>
