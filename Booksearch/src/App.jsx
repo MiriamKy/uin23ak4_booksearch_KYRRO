@@ -36,14 +36,18 @@ function App() {
           {books?.map((book) => {
             return (
               <article key={book.key} id="bookcard">
-              <h2>{book.title}</h2>
-              <h3>Author(s):</h3>
-              <ul>{book.author_name?.map((author, index) => <li key={index}>{author}</li>)}</ul>
-              <h3>Published: {book.first_publish_year}</h3>
-              {book.ratings_average ? <h3>Rating: {book.ratings_average}</h3> : null}
-              {book.isbn?.[0] ? <a href={`https://www.amazon.com/s?k=${book.isbn[0]}`} target="_blank"><button>Buy on Amazon</button></a> : <a href={`https://www.amazon.com/b?node=283155`} target="_blank"><button>Find on Amazon</button></a>}
+                <div className="imageContainer">
+                {book.isbn ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg`} /> : <p>No image to show</p>}
+                </div>
+                <h2>{book.title}</h2>
+                <h3>Author(s):</h3>
+                <ul>{book.author_name?.map((author, index) => <li key={index}>{author}</li>)}</ul>
+                <h3>Published: {book.first_publish_year}</h3>
+                {book.ratings_average ? <h3>Rating: {book.ratings_average}</h3> : null}
+                {book.isbn?.[0] ? <a href={`https://www.amazon.com/s?k=${book.isbn[0]}`} target="_blank"><button>Buy on Amazon</button></a> : <a href={`https://www.amazon.com/b?node=283155`} target="_blank"><button>Find on Amazon</button></a>}
               </article>
-            )})}
+            )
+          })}
           </section>
         </main>
     </>
@@ -51,6 +55,3 @@ function App() {
 }
 
 export default App
-
-// {book.cover_i ? (<img src={https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg} />) : (<p className="noimage">No image available</p>)} // Hvordan Line hentet bilder fra API
-// {{item.isbn?.[0] ? <a href={https://www.amazon.com/s?k=${item.isbn[0]}} target="_blank">Buy me at Amazon</a> : null} // Hvordan Line mappet ut fra isbn-arrayen og laget en knapp med link til amazon
