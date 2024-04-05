@@ -1,6 +1,5 @@
-import './App.css'
-import Layout from './components/Layout'
 import { useEffect, useState } from "react";
+import './scss/style.scss'
 
 function App() {
 
@@ -24,26 +23,29 @@ function App() {
 
   return (
     <>
-      <Layout>  
-      <h1>Booksearch</h1>
+      <main>
+        <header id="searchBar">
+        <h1>Booksearch</h1>
         <form>
             <label htmlFor="bookSearch">Search by title</label>
             <input onChange={(e) => setInput(e.target.value)} type="text" placeholder="Start typing..."/>
             <button type="button" onClick={() => getBooks()}>Search</button> 
         </form>
-        {books?.map((book) => {
-          return (
-            <article key={book.key}>
-            <h2>{book.title}</h2>
-            <h3>Author(s):</h3>
-            <ul>{book.author_name?.map((author, index) => <li key={index}>{author}</li>)}</ul>
-            <h3>Published: {book.first_publish_year}</h3>
-            {book.ratings_average ? <h3>Rating: {book.ratings_average}</h3> : null}
-            {book.isbn?.[0] ? <a href={`https://www.amazon.com/s?k=${book.isbn[0]}`} target="_blank"><button>Buy on Amazon</button></a> : <a href={`https://www.amazon.com/b?node=283155`} target="_blank"><button>Find on Amazon</button></a>}
-            </article>
-          )
-        })}
-      </Layout>
+        </header>
+        <section id="bookcards">
+          {books?.map((book) => {
+            return (
+              <article key={book.key} id="bookcard">
+              <h2>{book.title}</h2>
+              <h3>Author(s):</h3>
+              <ul>{book.author_name?.map((author, index) => <li key={index}>{author}</li>)}</ul>
+              <h3>Published: {book.first_publish_year}</h3>
+              {book.ratings_average ? <h3>Rating: {book.ratings_average}</h3> : null}
+              {book.isbn?.[0] ? <a href={`https://www.amazon.com/s?k=${book.isbn[0]}`} target="_blank"><button>Buy on Amazon</button></a> : <a href={`https://www.amazon.com/b?node=283155`} target="_blank"><button>Find on Amazon</button></a>}
+              </article>
+            )})}
+          </section>
+        </main>
     </>
   )
 }
