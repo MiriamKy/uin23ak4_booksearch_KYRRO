@@ -37,7 +37,7 @@ function App() {
             return (
               <article key={book.key} id="bookcard">
                 <div className="imageContainer">
-                {book.isbn ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg`} /> : <p>No image to show</p>}
+                {book.isbn ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg`} /> : <h3>No image to show</h3>}
                 </div>
                 <h2>{book.title}</h2>
                 <h3>Author(s):</h3>

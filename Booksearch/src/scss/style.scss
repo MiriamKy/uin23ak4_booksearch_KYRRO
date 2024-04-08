@@ -13,18 +13,17 @@
     --font:'Montserrat', sans-serif;
     --fontsize: 15px;
     --bredde: 800px;
-}
 
-:root {
     display: flex;
     justify-content: center;
+    background-color: var(--turkis);
+    font-family: var(--font);
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--turkis);
-    font-family: var(--font);
+    background-size: 100%;
     height: 100%;
 
     main {
@@ -36,15 +35,47 @@ body {
             text-align: center;
             width: 100%;
             max-height: 2rem;
+            color: var(--hvit);
 
             form {
                 display: flex;
                 justify-content: center;
                 gap: 2rem;
-                
+                background-color: var(--rosa);
+                color: var(--hvit);
+                padding: 10px;
+                border-radius: 5px;
+
+                label {
+                    text-wrap: nowrap;
+                    padding: 5px;
+
+                }
+
+                input {
+                    border-style: none;
+                    padding: 5px;
+                    color: var(--rosa);
+                    font-family: var(--font);
+                    border-radius: 5px;
+                    width: 100%;
+                }
+
+                button {
+                    background-color: var(--orange);
+                    color: var(--hvit);
+                    font-size: 12px;
+                    font-family: var(--font);
+                    border-style: none;
+                    border-radius: 5px;
+                    padding: 10px;
+
+                    &:hover {
+                        background-color: var(--hvit);
+                        color: var(--sort);
+                    }
+                }
             }
-
-
         } 
         section {
             display: grid;
@@ -52,34 +83,40 @@ body {
             margin-top: 5rem;
             max-width: 800px;
             gap: 2rem;
+            padding-top: 3rem;
             
             article {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 text-align: left;
-                max-width: 400px;
+                max-width: 200px;
                 background-color: var(--hvit);
                 padding: 7px;
                 height: 100%;
+                border-radius: 5px;
 
                 .imageContainer {
                     height: 250px;
                     display: flex;
                     justify-content: center;
 
-
                     img {
                         width: 100%;
-                        height: 100%;
-                        p {
-                            color: var(--rosa);
-                        }
+                        border-radius: 5px;
+                    }
+
+                    h3 {
+                        color: var(--rosa);
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
                     }
                 }
 
                 h2 {
                     font-size: 16px;
+                    color: var(--rosa);
                 }
 
                 h3 {
@@ -95,9 +132,65 @@ body {
                         font-size: 12px;
                     }
                 }
+
+                a {
+                    button {
+                        background-color: var(--orange);
+                        color: var(--hvit);
+                        font-size: 12px;
+                        font-family: var(--font);
+                        border-style: none;
+                        border-radius: 5px;
+                        padding: 10px;
+                        width: 100%;
+
+                        &:hover {
+                            background-color: var(--rosa);
+                            color: var(--hvit);
+                        }
+                    }
+                }
                 
             }
         }
     }
 
+}
+
+@media (max-width: 900px) {
+    body {
+        main {
+            section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    }
+
+}
+
+@media (max-width: 600px) {
+    body {
+        main {
+            padding: 1rem, 0, 1rem, 0;
+            margin: 1rem;
+
+            header {
+                form {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                    padding: 1rem;
+                }
+            }
+
+            section {
+                grid-template-columns: 1fr;
+                padding-top: 150px;
+
+                article {
+                    place-self: center;
+                }
+            }
+        }
+    }
 }
