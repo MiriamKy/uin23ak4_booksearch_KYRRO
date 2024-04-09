@@ -1,51 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import './scss/style.scss'
-import Bookcard from "./components/Bookcard";
+import Bookcards from "./components/Bookcards";
+import Search_results from "./components/Search_results";
 
-function App() {
+function App() { 
 
-  const [input, setInput] = useState("James+Bond"); //setInput er KANSKJE den funskjonen vi bruker senere for å sette ny state ved hjelp av input-feltet
-  const [books, setBooks] = useState([]); //Books er en state som jeg senere .mapper, her har den ingen start-innhold, men den er satt til en tom array
-
-  const getBooks = ()=>{
-      fetch(`https://openlibrary.org/search.json?title=${input}`)
-      .then(response => response.json())
-      .then(data => setBooks(data.docs))
-      .catch(error => console.error(error))
-      }
-
-  useEffect(()=>{
-    if (input.length > 2) {
-      getBooks()
-    }},[input])
-
-  console.log(input)
-  console.log(books)
+  const [books, setBooks] = useState([]); //Deklarerer staten books, som foreløpig er en tom array(derfor firkantparenteser i parentesen etter useState)
 
   return (
     <>
       <main>
-        <header id="searchBar">
-        <h1>Booksearch</h1>
-        <form>
-            <label htmlFor="bookSearch">Search by title</label>
-            <input onChange={(e) => setInput(e.target.value)} type="text" placeholder="Start typing..."/>
-            <button type="button" onClick={() => getBooks()}>Search</button> 
-        </form>
-        </header>
-        <section id="bookcards">
-              {books?.map((book, index) => (
-              <Bookcard
-              key={index}
-              title={book.title}
-              isbn={book.isbn}
-              author={book.author_name}
-              published={book.first_publish_year}
-              rating={book.ratings_average}
-              />
-              ))}
-          </section>
-        </main>
+        <Search_results setBooks={setBooks} /> {/* Arrayen får innhold når setBooks-funksjonen blir kallet i search_results, derfor sendt som prop litt lenger ned */}
+        <Bookcards books={books}/> {/* Books blir sendt som prop til bookcards fordi den der blir .mappet */}
+      </main>
     </>
   )
 }
