@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import './scss/style.scss'
+import Bookcard from "./components/Bookcard";
 
 function App() {
 
@@ -33,21 +34,16 @@ function App() {
         </form>
         </header>
         <section id="bookcards">
-          {books?.map((book) => {
-            return (
-              <article key={book.key} id="bookcard">
-                <div className="imageContainer">
-                {book.isbn ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg`} /> : <h3>No image to show</h3>}
-                </div>
-                <h2>{book.title}</h2>
-                <h3>Author(s):</h3>
-                <ul>{book.author_name?.map((author, index) => <li key={index}>{author}</li>)}</ul>
-                <h3>Published: {book.first_publish_year}</h3>
-                {book.ratings_average ? <h3>Rating: {book.ratings_average}</h3> : null}
-                {book.isbn?.[0] ? <a href={`https://www.amazon.com/s?k=${book.isbn[0]}`} target="_blank"><button>Buy on Amazon</button></a> : <a href={`https://www.amazon.com/b?node=283155`} target="_blank"><button>Find on Amazon</button></a>}
-              </article>
-            )
-          })}
+              {books?.map((book, index) => (
+              <Bookcard
+              key={index}
+              title={book.title}
+              isbn={book.isbn}
+              author={book.author_name}
+              published={book.first_publish_year}
+              rating={book.ratings_average}
+              />
+              ))}
           </section>
         </main>
     </>
