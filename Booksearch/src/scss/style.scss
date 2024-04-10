@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-/*Deklarerer variabler for farger og fonter*/
+//Deklarerer variabler for farger og fonter
 :root {
     --turkis: #91CCD9;
     --rosa: #D928AB;
-    --gul: #F2C12E;
-    --beige: #D9A441;
+    --gul: #F2C12E; //Foreløpig ikke brukt denne fargen, men kunne funnet et bruksområde til den ved videre utvikling, da den gjør paletten mer komplett
+    --lilla: #6c70d2;
     --orange: #F25C05;
     --hvit: #fff;
     --sort: #0d0c0d;
@@ -20,6 +20,7 @@
     font-family: var(--font);
 }
 
+//SASS er jo "vanlig" CSS, bare strukturert mer som HTML, så veldig logisk og ikke så mye mer å forklare på akkurat det
 body {
     margin: 0;
     padding: 0;
@@ -28,6 +29,8 @@ body {
 
     main {
         display: block;
+        padding: 1rem, 0, 1rem, 0;
+        margin: 1rem;
 
         header {
             display: flex;
@@ -49,7 +52,6 @@ body {
                 label {
                     text-wrap: nowrap;
                     padding: 5px;
-
                 }
 
                 input {
@@ -61,7 +63,7 @@ body {
                     width: 100%;
                 }
 
-                button {
+                button { //Button er fritatt fra CSS satt i root, og derfor må font osv bestemmes på nytt her
                     background-color: var(--orange);
                     color: var(--hvit);
                     font-size: 12px;
@@ -71,8 +73,7 @@ body {
                     padding: 10px;
 
                     &:hover {
-                        background-color: var(--hvit);
-                        color: var(--sort);
+                        background-color: var(--lilla);
                     }
                 }
             }
@@ -96,7 +97,7 @@ body {
                 height: 100%;
                 border-radius: 5px;
 
-                .imageContainer {
+                .imageContainer { //Bruker en id her (som er plassert på en riktig html-element) for å kunne være sikker på at jeg bare refererer til denne
                     height: 250px;
                     display: flex;
                     justify-content: center;
@@ -117,19 +118,37 @@ body {
                 h2 {
                     font-size: 16px;
                     color: var(--rosa);
+                    margin: 10px 0 15px 0;
+                    padding: 0;
                 }
 
                 h3 {
                     font-size: 12px;
+                    color: var(--sort);
+                    font-weight: 700;
+                    margin: 0 0 10px 0;
+                    padding: 0;
+                }
+
+                h4 {
+                    font-size: 10px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    margin: 0;
+                    padding: 0;
                 }
 
                 ul {
                     display: block;
-                    text-align: left;
+                    margin: 0 0 10px 0;
+                    padding: 0;
 
                     li {
                         list-style: none;
                         font-size: 12px;
+                        font-weight: 700;
+                        color: var(--sort);
+                        margin-bottom: 3px;
                     }
                 }
 
@@ -145,8 +164,7 @@ body {
                         width: 100%;
 
                         &:hover {
-                            background-color: var(--rosa);
-                            color: var(--hvit);
+                            background-color: var(--lilla);
                         }
                     }
                 }
@@ -157,7 +175,7 @@ body {
 
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) { //Denne media-queryen gjør noe med responsiviteten ved at den reduserer antall kolonner til 2 ved skjermbredde på 900px og mindre
     body {
         main {
             section {
@@ -168,12 +186,9 @@ body {
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) { //Ved 600px og mindre blir elementene i search bar-en dyttet under hverandre, artikkelkortvisningen reduseres til en kolonne, og plasseringen av artikkelkortene justeres litt.
     body {
         main {
-            padding: 1rem, 0, 1rem, 0;
-            margin: 1rem;
-
             header {
                 form {
                     display: flex;
